@@ -24,3 +24,11 @@ $majorChordNotes = array_map(function ($key) use ($keys, $tonalityC) {
 
 print_r($majorFormula);
 print_r($majorChordNotes);
+
+foreach ($fretboard as $stringNumber => $string) {
+    print "string: $stringNumber --> ";
+    foreach ($string as $fretNumber => $fret) {
+        print "[$fretNumber] {str_pad($fret,3)}, ";
+    }
+    print PHP_EOL;
+}
