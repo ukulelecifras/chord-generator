@@ -36,24 +36,23 @@ foreach ($fretboard as $stringNumber => $string) {
     print PHP_EOL;
 }
 
-
+$initialFret = 1;
 $chords = [];
-foreach ($fretboard[0] as $fretNumber0 => $note0) {
+foreach ( ([$fretboard[0][0]] + array_slice($fretboard[0], $initialFret, 4, true)) as $fretNumber0 => $note0) {
     $chord = [];
     if (in_array($note0, $majorChordNotes)) {
         $chord[] = strval($fretNumber0);
-        foreach ($fretboard[1] as $fretNumber1 => $note1) {
+        foreach ( ([$fretboard[1][0]] + array_slice($fretboard[1], $initialFret, 4, true)) as $fretNumber1 => $note1) {
             if (in_array($note1, $majorChordNotes)) {
                 $chord[] = strval($fretNumber1);
-                foreach ($fretboard[2] as $fretNumber2 => $note2) {
+                foreach ( ([$fretboard[1][0]] + array_slice($fretboard[2], $initialFret, 4, true)) as $fretNumber2 => $note2) {
                     if (in_array($note2, $majorChordNotes)) {
                         $chord[] = strval($fretNumber2);
-                        foreach ($fretboard[3] as $fretNumber3 => $note3) {
+                        foreach ( ([$fretboard[1][0]] + array_slice($fretboard[3], $initialFret, 4, true)) as $fretNumber3 => $note3) {
                             if (in_array($note3, $majorChordNotes)) {
                                 $chord[] = strval($fretNumber3);
-                                var_dump($chord);
+                                print_r($chord);
                                 $chords[] = $chord;
-
                                 array_pop($chord);
                             }
                         }
