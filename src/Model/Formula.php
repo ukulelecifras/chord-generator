@@ -17,5 +17,6 @@ namespace ChordGenerator\Model;
 // just temporary. it not supposed to be here
 class Formula
 {
-    static $major = [1,3,5];
+    static $major = ['1','3','5'];
+    static $minor = ['1','3','5'];
 }
