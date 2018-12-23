@@ -35,3 +35,34 @@ foreach ($fretboard as $stringNumber => $string) {
     }
     print PHP_EOL;
 }
+
+
+$chords = [];
+foreach ($fretboard[0] as $fretNumber0 => $note0) {
+    $chord = [];
+    if (in_array($note0, $majorChordNotes)) {
+        $chord[] = strval($fretNumber0);
+        foreach ($fretboard[1] as $fretNumber1 => $note1) {
+            if (in_array($note1, $majorChordNotes)) {
+                $chord[] = strval($fretNumber1);
+                foreach ($fretboard[2] as $fretNumber2 => $note2) {
+                    if (in_array($note2, $majorChordNotes)) {
+                        $chord[] = strval($fretNumber2);
+                        foreach ($fretboard[3] as $fretNumber3 => $note3) {
+                            if (in_array($note3, $majorChordNotes)) {
+                                $chord[] = strval($fretNumber3);
+                                var_dump($chord);
+                                $chords[] = $chord;
+
+                                array_pop($chord);
+                            }
+                        }
+                        array_pop($chord);
+                    }
+                }
+                array_pop($chord);
+            }
+        }
+        array_pop($chord);
+    }
+}
