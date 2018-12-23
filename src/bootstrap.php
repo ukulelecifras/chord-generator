@@ -1,4 +1,5 @@
 <?php
+namespace ChordGenerator;
 /**
  * This file is part of the PhpStorm.
  *
@@ -11,4 +12,4 @@
  * source code.
  */
 
-require_once __DIR__ . '/bootstrap.php';
+require_once  __DIR__ . '/../vendor/autoload.php';
