@@ -51,8 +51,17 @@ foreach ( ([$fretboard[0][0]] + array_slice($fretboard[0], $initialFret, 4, true
                         foreach ( ([$fretboard[1][0]] + array_slice($fretboard[3], $initialFret, 4, true)) as $fretNumber3 => $note3) {
                             if (in_array($note3, $majorChordNotes)) {
                                 $chord[] = strval($fretNumber3);
-                                print_r($chord);
-                                $chords[] = $chord;
+
+                                $chordUniqueNotes = array_unique([$fretboard[0][$chord[0]], $fretboard[1][$chord[1]], $fretboard[2][$chord[2]], $fretboard[3][$chord[3]]]);
+                                sort($chordUniqueNotes);
+
+                                $majorChordUniqueNotes = array_unique($majorChordNotes);
+                                sort($majorChordUniqueNotes);
+
+                                if($chordUniqueNotes == $majorChordUniqueNotes) {
+                                    print_r($chord);
+                                    $chords[] = $chord;
+                                }
                                 array_pop($chord);
                             }
                         }
