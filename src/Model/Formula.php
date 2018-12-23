@@ -14,11 +14,8 @@
 
 namespace ChordGenerator\Model;
 
-
-class ChordFormula
+// just temporary. it not supposed to be here
+class Formula
 {
-    // just temporary. it not supposed to be here
-    static $formulas = [
-        'm' => [1,3,5]
-    ];
+    static $major = [1,3,5];
 }
