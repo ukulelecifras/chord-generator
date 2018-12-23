@@ -26,7 +26,6 @@ $majorChordNotes = array_map(function ($key) use ($keys, $tonalityC) {
 print_r($majorFormula);
 print_r($majorChordNotes);
 
-
 // Print fretboard
 foreach ($fretboard as $stringNumber => $string) {
     print "string: $stringNumber --> ";
@@ -36,41 +35,44 @@ foreach ($fretboard as $stringNumber => $string) {
     print PHP_EOL;
 }
 
+$fretboardLength = 4;
 $initialFret = 1;
 $chords = [];
-foreach ( ([$fretboard[0][0]] + array_slice($fretboard[0], $initialFret, 4, true)) as $fretNumber0 => $note0) {
-    $chord = [];
-    if (in_array($note0, $majorChordNotes)) {
-        $chord[] = strval($fretNumber0);
-        foreach ( ([$fretboard[1][0]] + array_slice($fretboard[1], $initialFret, 4, true)) as $fretNumber1 => $note1) {
-            if (in_array($note1, $majorChordNotes)) {
-                $chord[] = strval($fretNumber1);
-                foreach ( ([$fretboard[1][0]] + array_slice($fretboard[2], $initialFret, 4, true)) as $fretNumber2 => $note2) {
-                    if (in_array($note2, $majorChordNotes)) {
-                        $chord[] = strval($fretNumber2);
-                        foreach ( ([$fretboard[1][0]] + array_slice($fretboard[3], $initialFret, 4, true)) as $fretNumber3 => $note3) {
-                            if (in_array($note3, $majorChordNotes)) {
-                                $chord[] = strval($fretNumber3);
 
-                                $chordUniqueNotes = array_unique([$fretboard[0][$chord[0]], $fretboard[1][$chord[1]], $fretboard[2][$chord[2]], $fretboard[3][$chord[3]]]);
-                                sort($chordUniqueNotes);
+foreach (range(1, count($fretboard[0])-$fretboardLength) as $initialFret) {
+    foreach (([$fretboard[0][0]] + array_slice($fretboard[0], $initialFret, $fretboardLength, true)) as $fretNumber0 => $note0) {
+        $chord = [];
+        if (in_array($note0, $majorChordNotes)) {
+            $chord[] = strval($fretNumber0);
+            foreach (([$fretboard[1][0]] + array_slice($fretboard[1], $initialFret, $fretboardLength, true)) as $fretNumber1 => $note1) {
+                if (in_array($note1, $majorChordNotes)) {
+                    $chord[] = strval($fretNumber1);
+                    foreach (([$fretboard[1][0]] + array_slice($fretboard[2], $initialFret, $fretboardLength, true)) as $fretNumber2 => $note2) {
+                        if (in_array($note2, $majorChordNotes)) {
+                            $chord[] = strval($fretNumber2);
+                            foreach (([$fretboard[1][0]] + array_slice($fretboard[3], $initialFret, $fretboardLength, true)) as $fretNumber3 => $note3) {
+                                if (in_array($note3, $majorChordNotes)) {
+                                    $chord[] = strval($fretNumber3);
 
-                                $majorChordUniqueNotes = array_unique($majorChordNotes);
-                                sort($majorChordUniqueNotes);
+                                    $chordUniqueNotes = array_unique([$fretboard[0][$chord[0]], $fretboard[1][$chord[1]], $fretboard[2][$chord[2]], $fretboard[3][$chord[3]]]);
+                                    sort($chordUniqueNotes);
 
-                                if($chordUniqueNotes == $majorChordUniqueNotes) {
-                                    print_r($chord);
-                                    $chords[] = $chord;
+                                    $majorChordUniqueNotes = array_unique($majorChordNotes);
+                                    sort($majorChordUniqueNotes);
+
+                                    if ($chordUniqueNotes == $majorChordUniqueNotes && !in_array($chord, $chords)) {
+                                        $chords[] = $chord;
+                                    }
+                                    array_pop($chord);
                                 }
-                                array_pop($chord);
                             }
+                            array_pop($chord);
                         }
-                        array_pop($chord);
                     }
+                    array_pop($chord);
                 }
-                array_pop($chord);
             }
+            array_pop($chord);
         }
-        array_pop($chord);
     }
 }
