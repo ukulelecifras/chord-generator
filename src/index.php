@@ -12,3 +12,16 @@
  */
 
 require_once __DIR__ . '/bootstrap.php';
+
+$fretboard = \ChordGenerator\Model\UkuleleFretboard::$fretboard;
+$keys = \ChordGenerator\Model\Key::$keys;
+$tonalityC = \ChordGenerator\Model\Tonality::$c;
+
+$majorFormula = ['1','3','5'];
+
+$majorChordNotes = array_map(function ($key) use ($keys, $tonalityC) {
+    return $tonalityC[$keys[$key]];
+}, $majorFormula);
+
+print_r($majorFormula);
+print_r($majorChordNotes);
