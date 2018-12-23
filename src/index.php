@@ -17,7 +17,7 @@ $fretboard = \ChordGenerator\Model\UkuleleFretboard::$fretboard;
 $keys = \ChordGenerator\Model\Key::$keys;
 $tonalityC = \ChordGenerator\Model\Tonality::$c;
 $majorFormula = \ChordGenerator\Model\Formula::$major;
-$minorFormula = \ChordGenerator\Model\Formula::$major;
+$minorFormula = \ChordGenerator\Model\Formula::$minor;
 $rootNote = 'C';
 
 $majorChordNotes = array_map(function ($key) use ($keys, $tonalityC) {
@@ -85,3 +85,5 @@ foreach (range(1, count($fretboard[0])-$fretboardLength) as $initialFret) {
         }
     }
 }
+
+print_r($chords);

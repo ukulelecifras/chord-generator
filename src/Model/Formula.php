@@ -18,5 +18,5 @@ namespace ChordGenerator\Model;
 class Formula
 {
     static $major = ['1','3','5'];
-    static $minor = ['1','3','5'];
+    static $minor = ['1','3b','5'];
 }
