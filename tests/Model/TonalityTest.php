@@ -12,7 +12,47 @@
  * source code.
  */
 
-class TonalityTest
-{
+use PHPUnit\Framework\TestCase;
 
+class TonalityTest extends TestCase
+{
+    /**
+     * @dataProvider rootNoteTonalities
+     */
+    public function testReturnTonalityGivenRootNote($rootNote, $tonalityNotes)
+    {
+        $this->assertEquals(ChordGenerator\Model\Tonality::getTonality($rootNote), $tonalityNotes);
+    }
+
+
+    public function rootNoteTonalities()
+    {
+        return [
+            ['C',  ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']],
+            ['C#', ['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C']],
+            ['D',  ['D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#']],
+            ['D#', ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D']],
+            ['E',  ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#']],
+            ['F',  ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']],
+            ['F#', ['F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F']],
+            ['G',  ['G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#']],
+            ['G#', ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G']],
+            ['A',  ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']],
+            ['A#', ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A']],
+            ['B',  ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#']]
+        ];
+    }
+
+
+    public function testReturnCTonalityNotesOnEmptyRootNote()
+    {
+        $this->assertEquals(ChordGenerator\Model\Tonality::getTonality(), ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']);
+    }
+
+
+    public function testThrowExceptionOnInvalidRootNote()
+    {
+        $this->expectException(\Exception::class);
+        \ChordGenerator\Model\Tonality::getTonality('Z');
+    }
 }

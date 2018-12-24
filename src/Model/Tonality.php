@@ -31,9 +31,12 @@ class Tonality
         11  => 'B'  // 7
     ];
 
-    static public function getTonality($rootNote)
+    static public function getTonality($rootNote = 'C')
     {
         $rootNoteIndex = array_search($rootNote, self::$chromaticScale);
+        if ($rootNoteIndex === false) {
+            throw new \Exception("The root note '$rootNote' doest not exists in the chromatic scale. Expected values: C,C#,D,D#,E,F,G,G#,A,A# or B.", 1545659945);
+        }
         return array_merge(
             array_slice(self::$chromaticScale, $rootNoteIndex, count(self::$chromaticScale)),
             array_slice(self::$chromaticScale, 0, $rootNoteIndex)
