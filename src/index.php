@@ -13,41 +13,56 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
-function getFormulaNotesByTonality($keys, $formula, $tonality) {
+function getFormulaNotesByTonality($keys, $formula, $tonality)
+{
     return array_map(function ($key) use ($keys, $tonality) {
         return $tonality[$keys[$key]];
     }, $formula);
 }
 
-function uniqueAndSort($notes) {
+
+function uniqueAndSort($notes)
+{
     $uniqueNotes = array_unique($notes);
     sort($uniqueNotes);
     return $uniqueNotes;
 }
 
-function filterStringByNotes($string, $notes) {
+
+function filterStringByNotes($string, $notes)
+{
     return array_filter($string, function ($note) use ($notes) {
         return in_array($note, $notes);
     });
 }
 
-function getFretboardSliceFilteredByNotes($fretboard, $initialFret, $sliceLength, $notes) {
-    return array_map(function($string) use($initialFret, $sliceLength, $notes) {
+
+function getFretboardSliceFilteredByNotes($fretboard, $initialFret, $sliceLength, $notes)
+{
+    return array_map(function ($string) use ($initialFret, $sliceLength, $notes) {
         $slice = [$string[0]] + array_slice($string, $initialFret, $sliceLength, true);
         return filterStringByNotes($slice, $notes);
     }, $fretboard);
 }
 
-function printChordFretMaps($chords) {
-    foreach($chords as $chord) {
+
+function printChordFretMaps($chords)
+{
+    foreach ($chords as $chord) {
         print "[" . implode(' ', $chord) . "]" . PHP_EOL;
     }
 }
 
+
+function getChordNotesFromChordFretMap($fretboard, $chordFretMap)
+{
+    return [$fretboard[0][$chordFretMap[0]], $fretboard[1][$chordFretMap[1]], $fretboard[2][$chordFretMap[2]], $fretboard[3][$chordFretMap[3]]];
+}
+
+
 function makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes) {
     $firstInitialFret = 1;
     $lastInitialFret = count($fretboard[0]) - $fretboardSliceLength;
-    $uniqueFormulaNotes = uniqueAndSort($formulaNotes);
     $chordFretMapAlternatives = [];
 
     foreach (range($firstInitialFret, $lastInitialFret) as $initialFret) {
@@ -60,9 +75,8 @@ function makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formul
                     $chordFretMap[] = strval($fret2);
                     foreach ($cleanFretboard[3] as $fret3 => $note3) {
                         $chordFretMap[] = strval($fret3);
-                        $chordNotes = [$fretboard[0][$chordFretMap[0]], $fretboard[1][$chordFretMap[1]], $fretboard[2][$chordFretMap[2]], $fretboard[3][$chordFretMap[3]]];
-                        $uniqueChordNotes = uniqueAndSort($chordNotes);
-                        if ($uniqueFormulaNotes == $uniqueChordNotes && !in_array($chordFretMap, $chordFretMapAlternatives)) {
+                        $chordNotes = getChordNotesFromChordFretMap($fretboard, $chordFretMap);
+                        if (empty(array_diff($formulaNotes, $chordNotes)) && !in_array($chordFretMap, $chordFretMapAlternatives)) {
                             $chordFretMapAlternatives[] = $chordFretMap;
                         }
                         array_pop($chordFretMap);
