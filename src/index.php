@@ -21,14 +21,6 @@ function getFormulaNotesByTonality($keys, $formula, $tonality)
 }
 
 
-function uniqueAndSort($notes)
-{
-    $uniqueNotes = array_unique($notes);
-    sort($uniqueNotes);
-    return $uniqueNotes;
-}
-
-
 function filterStringByNotes($string, $notes)
 {
     return array_filter($string, function ($note) use ($notes) {
