@@ -1,5 +1,5 @@
 <?php
-namespace ChordGenerator;
+
 /**
  * This file is part of the Ukulele Cifras Chord Generator.
  *
@@ -12,4 +12,7 @@ namespace ChordGenerator;
  * source code.
  */
 
-require_once  __DIR__ . '/../vendor/autoload.php';
+class TonalityTest
+{
+
+}

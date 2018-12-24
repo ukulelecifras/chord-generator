@@ -2,7 +2,7 @@
 namespace ChordGenerator\Model;
 
 /**
- * This file is part of the PhpStorm.
+ * This file is part of the Ukulele Cifras Chord Generator.
  *
  * Created by Thiago Colares
  *
