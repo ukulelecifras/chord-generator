@@ -88,13 +88,15 @@ foreach (\ChordGenerator\Model\Tonality::CHROMATIC_SCALE as $rootNote) {
     $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
     $fretboard = \ChordGenerator\Model\UkuleleFretboard::FRETBOARD;
     $keys = \ChordGenerator\Model\Key::$keys;
-    $formulas = \ChordGenerator\Model\Formula::getFormulas();
+    $formulas = (new \ChordGenerator\Service\FormulaReaderService())->read('./Resources/chord-formulas.csv');
     foreach ($formulas as $formula) {
-        $formulaNotes = getFormulaNotesByTonality($keys, $formula['formula'], $tonality);
+        /** @var \ChordGenerator\Model\Formula $formula */
+
+        $formulaNotes = getFormulaNotesByTonality($keys, $formula->getUkeFormula(), $tonality);
 
         $fretboardSliceLength = 4; // human-hand possible
         $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
-        print "$rootNote [" . implode(' ', $formula['formula']) . "] " . $formula['name'] . PHP_EOL;
+        print "$rootNote {$formula->getName()} [" . implode(' ', $formula->getUkeFormula()) . "] " . PHP_EOL;
         print implode(' ', $tonality) . PHP_EOL;
         printChordFretMaps($chordFretMapAlternatives);
 

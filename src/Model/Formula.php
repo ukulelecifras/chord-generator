@@ -14,24 +14,72 @@
 
 namespace ChordGenerator\Model;
 
-// just temporary. it not supposed to be here
 class Formula
 {
-    static public function getFormulas()
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var array
+     */
+    private $regularFormula;
+
+    /**
+     * @var array
+     */
+    private $ukeFormula;
+
+    /**
+     * @var string
+     */
+    private $symbol;
+
+    /**
+     * Formula constructor.
+     * @param string $name
+     * @param array $regularFormula
+     * @param array $ukeFormula
+     * @param string $symbol
+     */
+    public function __construct($name, array $regularFormula, array $ukeFormula, $symbol)
     {
-        return [
-            [
-                'name' => 'major',
-                'formula' => ['1', '3', '5']
-            ],
-            [
-                'name' => 'major seventh',
-                'formula' => ['1', '3', '5', '7']
-            ],
-            [
-                'name' => 'major ninth',
-                'formula' => ['1', '3', '7', '9']
-            ],
-        ];
+        $this->name = $name;
+        $this->regularFormula = $regularFormula;
+        $this->ukeFormula = $ukeFormula;
+        $this->symbol = $symbol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRegularFormula()
+    {
+        return $this->regularFormula;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUkeFormula()
+    {
+        return $this->ukeFormula;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSymbol()
+    {
+        return $this->symbol;
     }
 }
