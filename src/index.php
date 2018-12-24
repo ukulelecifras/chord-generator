@@ -99,11 +99,11 @@ foreach (\ChordGenerator\Model\Tonality::$chromaticScale as $rootNote) {
     $keys = \ChordGenerator\Model\Key::$keys;
     $formulas = \ChordGenerator\Model\Formula::getFormulas();
     foreach ($formulas as $formula) {
-        $formulaNotes = getFormulaNotesByTonality($keys, $formula, $tonality);
+        $formulaNotes = getFormulaNotesByTonality($keys, $formula['formula'], $tonality);
 
         $fretboardSliceLength = 4; // human-hand possible
         $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
-        print "$rootNote [" . implode(' ', $formula) . "]" . PHP_EOL;
+        print "$rootNote [" . implode(' ', $formula['formula']) . "] " . $formula['name'] . PHP_EOL;
         print implode(' ', $tonality) . PHP_EOL;
         printChordFretMaps($chordFretMapAlternatives);
 
