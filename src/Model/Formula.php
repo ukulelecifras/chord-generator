@@ -19,4 +19,9 @@ class Formula
 {
     static $major = ['1','3','5'];
     static $minor = ['1','3b','5'];
+
+    static public function getFormulas()
+    {
+        return [self::$major, self::$minor];
+    }
 }

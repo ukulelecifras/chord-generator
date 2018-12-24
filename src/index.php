@@ -94,21 +94,23 @@ function makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formul
 $countChords = 0;
 foreach (\ChordGenerator\Model\Tonality::$chromaticScale as $rootNote) {
     $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
-    print implode(' ', $tonality) . PHP_EOL;
 
     $fretboard = \ChordGenerator\Model\UkuleleFretboard::$fretboard;
     $keys = \ChordGenerator\Model\Key::$keys;
-    $majorFormula = \ChordGenerator\Model\Formula::$major;
+    $formulas = \ChordGenerator\Model\Formula::getFormulas();
+    foreach ($formulas as $formula) {
+        $formulaNotes = getFormulaNotesByTonality($keys, $formula, $tonality);
 
-    $formulaNotes = getFormulaNotesByTonality($keys, $majorFormula, $tonality);
+        $fretboardSliceLength = 4; // human-hand possible
+        $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
+        print "$rootNote [" . implode(' ', $formula) . "]" . PHP_EOL;
+        print implode(' ', $tonality) . PHP_EOL;
+        printChordFretMaps($chordFretMapAlternatives);
 
-    $fretboardSliceLength = 4; // human-hand possible
-    $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
-    printChordFretMaps($chordFretMapAlternatives);
+        $countChords+=count($chordFretMapAlternatives);
 
-    $countChords+=count($chordFretMapAlternatives);
-
-    print PHP_EOL;
+        print PHP_EOL;
+    }
 }
 
 print PHP_EOL . "$countChords chords" . PHP_EOL;
