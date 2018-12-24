@@ -1,4 +1,6 @@
-# chord-generator
+[![Build Status](https://travis-ci.org/ukulelecifras/chord-generator.svg?branch=master)](https://travis-ci.org/ukulelecifras/chord-generator)
+
+# Ukulele Cifras Chord Generator
 
 # Running unit tests
 
