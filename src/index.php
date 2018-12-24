@@ -84,7 +84,7 @@ function makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formul
 }
 
 $countChords = 0;
-foreach (\ChordGenerator\Model\Tonality::$chromaticScale as $rootNote) {
+foreach (\ChordGenerator\Model\Tonality::getTonality() as $rootNote) {
     $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
 
     $fretboard = \ChordGenerator\Model\UkuleleFretboard::$fretboard;

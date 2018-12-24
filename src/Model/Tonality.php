@@ -16,7 +16,7 @@ namespace ChordGenerator\Model;
 
 class Tonality
 {
-    static public $chromaticScale = [
+    static private $chromaticScale = [
         0   => 'C', // 1
         1   => 'C#',
         2   => 'D', // 2
