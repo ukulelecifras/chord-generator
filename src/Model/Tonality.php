@@ -16,7 +16,7 @@ namespace ChordGenerator\Model;
 
 class Tonality
 {
-    static private $chromaticScale = [
+    const CHROMATIC_SCALE = [
         0   => 'C', // 1
         1   => 'C#',
         2   => 'D', // 2
@@ -33,13 +33,13 @@ class Tonality
 
     static public function getTonality($rootNote = 'C')
     {
-        $rootNoteIndex = array_search($rootNote, self::$chromaticScale);
+        $rootNoteIndex = array_search($rootNote, self::CHROMATIC_SCALE);
         if ($rootNoteIndex === false) {
             throw new \Exception("The root note '$rootNote' doest not exists in the chromatic scale. Expected values: C,C#,D,D#,E,F,G,G#,A,A# or B.", 1545659945);
         }
         return array_merge(
-            array_slice(self::$chromaticScale, $rootNoteIndex, count(self::$chromaticScale)),
-            array_slice(self::$chromaticScale, 0, $rootNoteIndex)
+            array_slice(self::CHROMATIC_SCALE, $rootNoteIndex, count(self::CHROMATIC_SCALE)),
+            array_slice(self::CHROMATIC_SCALE, 0, $rootNoteIndex)
         );
     }
 }

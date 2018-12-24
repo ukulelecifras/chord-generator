@@ -21,8 +21,7 @@ namespace ChordGenerator\Model;
  */
 class UkuleleFretboard
 {
-    // just temporary. it not supposed to be here
-    static public $fretboard = [
+    const FRETBOARD = [
         ['A' , 'A#', 'B' , 'C' , 'C#', 'D' , 'D#', 'E' , 'F' , 'F#', 'G' , 'G#', 'A' ],
         ['E' , 'F' , 'F#', 'G' , 'G#', 'A' , 'A#', 'B' , 'C' , 'C#', 'D' , 'D#', 'E' ],
         ['C' , 'C#', 'D' , 'D#', 'E' , 'F' , 'F#', 'G' , 'G#', 'A' , 'A#', 'B' , 'C' ],
