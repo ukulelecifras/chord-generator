@@ -16,7 +16,7 @@ namespace ChordGenerator\Model;
 
 class Tonality
 {
-    static public $c = [
+    static public $chromaticScale = [
         0   => 'C', // 1
         1   => 'C#',
         2   => 'D', // 2
@@ -30,4 +30,13 @@ class Tonality
         10  => 'A#',
         11  => 'B'  // 7
     ];
+
+    static public function getTonality($rootNote)
+    {
+        $rootNoteIndex = array_search($rootNote, self::$chromaticScale);
+        return array_merge(
+            array_slice(self::$chromaticScale, $rootNoteIndex, count(self::$chromaticScale)),
+            array_slice(self::$chromaticScale, 0, $rootNoteIndex)
+        );
+    }
 }
