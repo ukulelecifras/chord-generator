@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ukulelecifras/chord-generator.svg?branch=master)](https://travis-ci.org/ukulelecifras/chord-generator)
+[![Build Status](https://travis-ci.org/ukulelecifras/chord-generator.svg?branch=master)](https://travis-ci.org/ukulelecifras/chord-generator) [![License](https://poser.pugx.org/ukulelecifras/chord-generator/license)](https://packagist.org/packages/ukulelecifras/chord-generator)
 
 # Ukulele Cifras Chord Generator
 
