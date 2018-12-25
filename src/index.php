@@ -83,38 +83,40 @@ function makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formul
     return $chordFretMapAlternatives;
 }
 
-$chords = [];
-$countChords = 0;
-foreach (\ChordGenerator\Model\Tonality::CHROMATIC_SCALE as $rootNote) {
-    $chord = ['rootNote' => $rootNote];
 
-    $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
-    $fretboard = \ChordGenerator\Model\UkuleleFretboard::FRETBOARD;
-    $keys = \ChordGenerator\Model\Key::$keys;
-    $formulas = (new \ChordGenerator\Service\FormulaReaderService())->read('./Resources/chord-formulas.csv');
+function chordGenerator() {
+    foreach (\ChordGenerator\Model\Tonality::CHROMATIC_SCALE as $rootNote) {
+        $keys = \ChordGenerator\Model\Key::$keys;
+        $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
+        $fretboard = \ChordGenerator\Model\UkuleleFretboard::FRETBOARD;
+        $formulas = (new \ChordGenerator\Service\FormulaReaderService())->read('./Resources/chord-formulas.csv');
+        foreach ($formulas as $formula) {
+            /** @var \ChordGenerator\Model\Formula $formula */
+            $formulaNotes = getFormulaNotesByTonality($keys, $formula->getUkeFormula(), $tonality);
+            $fretboardSliceLength = 4; // human-hand possible
+            $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
 
-    $chord['formulas'] = [];
-    foreach ($formulas as $formula) {
-        /** @var \ChordGenerator\Model\Formula $formula */
-
-        $formulaNotes = getFormulaNotesByTonality($keys, $formula->getUkeFormula(), $tonality);
-        $fretboardSliceLength = 4; // human-hand possible
-        $chordFretMapAlternatives = makeChordFretMapAlternatives($fretboard, $fretboardSliceLength, $formulaNotes);
-
-        $chord['formulas'][] = [
-            'name' => $formula->getName(),
-            'symbol' => $formula->getSymbol(),
-            'formula' => $formula->getRegularFormula(),
-            'formulaNotes' => $formulaNotes,
-            'fretMaps' => $chordFretMapAlternatives
-        ];
-        $countChords+=count($chordFretMapAlternatives);
-
+            yield new \ChordGenerator\Model\Chord(
+                $rootNote,
+                $formula->getName(),
+                $formula->getSymbol(),
+                $formula->getUkeFormula(),
+                $formulaNotes,
+                $chordFretMapAlternatives
+            );
+        }
     }
-    $chords[] = $chord;
 }
 
-file_put_contents('./Output/chords.json', json_encode($chords));
+
+$countChords = 0;
+foreach (chordGenerator() as $chord) {
+    /** @var \ChordGenerator\Model\Chord $chord */
+    $countChords+=count($chord->getFretMaps());
+    print $chord . PHP_EOL;
+}
+
+//file_put_contents('./Output/chords.json', json_encode($chords));
 
 print PHP_EOL . "$countChords chords" . PHP_EOL;
 
