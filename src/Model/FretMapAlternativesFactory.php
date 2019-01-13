@@ -34,7 +34,7 @@ class FretMapAlternativesFactory
                             $chordFretMap[] = strval($fret3);
                             $chordNotes = self::getChordNotesFromChordFretMap($fretboard, $chordFretMap);
                             if (empty(array_diff($formulaNotes, $chordNotes)) && !in_array($chordFretMap, $chordFretMapAlternatives)) {
-                                $chordFretMapAlternatives[] = $chordFretMap;
+                                $chordFretMapAlternatives[] = array_reverse($chordFretMap);
                             }
                             array_pop($chordFretMap);
                         }
