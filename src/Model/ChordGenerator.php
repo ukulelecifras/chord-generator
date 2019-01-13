@@ -26,6 +26,8 @@ class ChordGenerator
             foreach ($formulas as $formula) {
                 /** @var \ChordGenerator\Model\Formula $formula */
                 $formulaNotes = self::getFormulaNotesByTonality($keys, $formula->getUkeFormula(), $tonality);
+                print_r($formulaNotes);
+                die;
                 $fretboardSliceLength = 4; // human-hand possible
                 $chordFretMapAlternatives = \ChordGenerator\Model\FretMapAlternativesFactory::create($fretboard, $fretboardSliceLength, $formulaNotes);
 
