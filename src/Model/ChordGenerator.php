@@ -22,7 +22,7 @@ class ChordGenerator
             $keys = \ChordGenerator\Model\Key::$keys;
             $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
             $fretboard = \ChordGenerator\Model\UkuleleFretboard::FRETBOARD;
-            $formulas = (new \ChordGenerator\Service\FormulaReaderService())->read('./Resources/chord-formulas.csv');
+            $formulas = (new \ChordGenerator\Service\FormulaReaderService())->read(__DIR__ . '/../Resources/chord-formulas.csv');
             foreach ($formulas as $formula) {
                 /** @var \ChordGenerator\Model\Formula $formula */
                 $formulaNotes = self::getFormulaNotesByTonality($keys, $formula->getUkeFormula(), $tonality);
