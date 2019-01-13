@@ -33,8 +33,9 @@ class FretMapAlternativesFactory
                         foreach ($cleanFretboard[3] as $fret3 => $note3) {
                             $chordFretMap[] = strval($fret3);
                             $chordNotes = self::getChordNotesFromChordFretMap($fretboard, $chordFretMap);
-                            if (empty(array_diff($formulaNotes, $chordNotes)) && !in_array($chordFretMap, $chordFretMapAlternatives)) {
-                                $chordFretMapAlternatives[] = array_reverse($chordFretMap);
+                            $orderedChordFretMap = array_reverse($chordFretMap);
+                            if (empty(array_diff($formulaNotes, $chordNotes)) && !in_array($orderedChordFretMap, $chordFretMapAlternatives)) {
+                                $chordFretMapAlternatives[] = $orderedChordFretMap;
                             }
                             array_pop($chordFretMap);
                         }
