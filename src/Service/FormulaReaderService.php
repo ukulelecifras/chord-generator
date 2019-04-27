@@ -22,6 +22,7 @@ class FormulaReaderService
     const REGULAR_FORMULA_KEY = 1;
     const UKULELE_FORMULA_KEY = 2;
     const SYMBOL_KEY = 3;
+    const SLUG_NAME_KEY = 4;
 
     public function read($filename)
     {
@@ -36,7 +37,8 @@ class FormulaReaderService
                     $row[self::NAME_KEY],
                     $row[self::REGULAR_FORMULA_KEY],
                     $row[self::UKULELE_FORMULA_KEY],
-                    $row[self::SYMBOL_KEY]);
+                    $row[self::SYMBOL_KEY],
+                    $row[self::SLUG_NAME_KEY]);
             }
         }
         fclose($handle);

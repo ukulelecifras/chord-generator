@@ -29,9 +29,10 @@ class ChordGenerator
                 $fretboardSliceLength = 4; // human-hand possible
                 $chordFretMapAlternatives = \ChordGenerator\Model\FretMapAlternativesFactory::create($fretboard, $fretboardSliceLength, $formulaNotes);
 
-                yield new \ChordGenerator\Model\Chord(
+                yield ChordFactory::create(
                     $rootNote,
                     $formula->getName(),
+                    $formula->getSlugName(),
                     $formula->getSymbol(),
                     $formula->getUkeFormula(),
                     $formulaNotes,
