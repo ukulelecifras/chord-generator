@@ -20,7 +20,7 @@ class Chord
     /**
      * @var string
      */
-    private $rootNome;
+    private $rootNote;
 
     /**
      * @var string
@@ -49,16 +49,16 @@ class Chord
 
     /**
      * Chord constructor.
-     * @param string $rootNome
+     * @param string $rootNote
      * @param string $name
      * @param string $symbol
      * @param array $formula
      * @param array $notes
      * @param array $fretMaps
      */
-    public function __construct($rootNome, $name, $symbol, array $formula, array $notes, array $fretMaps)
+    public function __construct($rootNote, $name, $symbol, array $formula, array $notes, array $fretMaps)
     {
-        $this->rootNome = $rootNome;
+        $this->rootNote = $rootNote;
         $this->name = $name;
         $this->symbol = $symbol;
         $this->formula = $formula;
@@ -69,9 +69,9 @@ class Chord
     /**
      * @return string
      */
-    public function getRootNome()
+    public function getRootNote()
     {
-        return $this->rootNome;
+        return $this->rootNote;
     }
 
     /**
@@ -114,9 +114,21 @@ class Chord
         return $this->fretMaps;
     }
 
+    /**
+     * @return array
+     */
+    public function getArray()
+    {
+        return [
+            'rootNote' => $this->rootNote,
+            'name' => "{$this->rootNote}{$this->symbol}",
+            'fretMaps' => $this->fretMaps
+        ];
+    }
+
     public function __toString()
     {
         $fretMaps = implode(', ', array_map(function($fretMap) {return implode('-', $fretMap);}, $this->fretMaps));
-        return "{$this->rootNome}{$this->symbol} [" . implode('-', $this->formula) . "][" . implode('-', $this->notes) . "] [" . $fretMaps . "]";
+        return "{$this->rootNote}{$this->symbol} [" . implode('-', $this->formula) . "][" . implode('-', $this->notes) . "] [" . $fretMaps . "]";
     }
 }
