@@ -25,17 +25,17 @@ class FretMapAlternativesFactory
         foreach (range($firstInitialFret, $lastInitialFret) as $initialFret) {
             $cleanFretboard = self::getFretboardSliceFilteredByNotes($fretboard, $initialFret, $fretboardSliceLength, $formulaNotes);
             foreach ($cleanFretboard[0] as $fret0 => $note0) {
-                $chordFretMap = [strval($fret0)];
+                $chordFretMap = [$fret0];
                 foreach ($cleanFretboard[1] as $fret1 => $note1) {
-                    $chordFretMap[] = strval($fret1);
+                    $chordFretMap[] = $fret1;
                     foreach ($cleanFretboard[2] as $fret2 => $note2) {
-                        $chordFretMap[] = strval($fret2);
+                        $chordFretMap[] = $fret2;
                         foreach ($cleanFretboard[3] as $fret3 => $note3) {
-                            $chordFretMap[] = strval($fret3);
+                            $chordFretMap[] = $fret3;
                             $chordNotes = self::getChordNotesFromChordFretMap($fretboard, $chordFretMap);
                             $orderedChordFretMap = array_reverse($chordFretMap);
                             if (empty(array_diff($formulaNotes, $chordNotes)) && !in_array($orderedChordFretMap, $chordFretMapAlternatives)) {
-                                $chordFretMapAlternatives[] = (int) $orderedChordFretMap;
+                                $chordFretMapAlternatives[] = $orderedChordFretMap;
                             }
                             array_pop($chordFretMap);
                         }
