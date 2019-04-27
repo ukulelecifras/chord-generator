@@ -37,18 +37,25 @@ class Formula
     private $symbol;
 
     /**
+     * @var string
+     */
+    private $slugName;
+
+    /**
      * Formula constructor.
      * @param string $name
      * @param array $regularFormula
      * @param array $ukeFormula
      * @param string $symbol
+     * @param string $slugName
      */
-    public function __construct($name, array $regularFormula, array $ukeFormula, $symbol)
+    public function __construct($name, array $regularFormula, array $ukeFormula, $symbol, $slugName)
     {
         $this->name = $name;
         $this->regularFormula = $regularFormula;
         $this->ukeFormula = $ukeFormula;
         $this->symbol = $symbol;
+        $this->slugName = $slugName;
     }
 
     /**
@@ -81,5 +88,13 @@ class Formula
     public function getSymbol()
     {
         return $this->symbol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlugName()
+    {
+        return $this->slugName;
     }
 }
