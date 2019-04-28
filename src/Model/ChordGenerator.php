@@ -36,7 +36,8 @@ class ChordGenerator
                     $formula->getSymbol(),
                     $formula->getUkeFormula(),
                     $formulaNotes,
-                    $chordFretMapAlternatives
+                    $chordFretMapAlternatives,
+                    $formula->getSymbolVariations()
                 );
             }
         }

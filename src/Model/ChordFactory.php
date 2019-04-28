@@ -6,7 +6,7 @@ namespace ChordGenerator\Model;
 
 class ChordFactory
 {
-    static public function create($rootNote, $name, $slugName, $symbol, $formula, $notes, $fretMaps)
+    static public function create($rootNote, $name, $slugName, $symbol, $formula, $notes, $fretMaps, $symbolVariations)
     {
         return new \ChordGenerator\Model\Chord(
             $rootNote,
@@ -15,7 +15,8 @@ class ChordFactory
             "{$rootNote}{$symbol}",
             $formula,
             $notes,
-            $fretMaps
+            $fretMaps,
+            $symbolVariations
         );
 
     }

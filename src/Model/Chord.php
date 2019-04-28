@@ -53,6 +53,11 @@ class Chord
     private $fretMaps;
 
     /**
+     * @var array
+     */
+    private $symbolVariations;
+
+    /**
      * Chord constructor.
      * @param string $rootNote
      * @param string $name
@@ -61,8 +66,9 @@ class Chord
      * @param array $formula
      * @param array $notes
      * @param array $fretMaps
+     * @param array $symbolVariations
      */
-    public function __construct($rootNote, $name, $slugName, $symbol, array $formula, array $notes, array $fretMaps)
+    public function __construct($rootNote, $name, $slugName, $symbol, array $formula, array $notes, array $fretMaps, array $symbolVariations)
     {
         $this->rootNote = $rootNote;
         $this->name = $name;
@@ -71,6 +77,7 @@ class Chord
         $this->formula = $formula;
         $this->notes = $notes;
         $this->fretMaps = $fretMaps;
+        $this->symbolVariations = $symbolVariations;
     }
 
     /**
@@ -132,6 +139,14 @@ class Chord
     /**
      * @return array
      */
+    public function getSymbolVariations()
+    {
+        return $this->symbolVariations;
+    }
+
+    /**
+     * @return array
+     */
     public function getArray()
     {
         return [
@@ -141,7 +156,8 @@ class Chord
             'rootNote' => $this->rootNote,
             'formula' => $this->formula,
             'notes' => $this->notes,
-            'fretMaps' => $this->fretMaps
+            'fretMaps' => $this->fretMaps,
+            'symbolVariations' => $this->symbolVariations
         ];
     }
 
