@@ -31,9 +31,9 @@ class FormulaReaderService
         if (($handle = fopen($filename, 'r')) !== false) {
 
             // get the first line then do nothing. just to skip it
-            fgetcsv($handle, 100, ',');
+            fgetcsv($handle, 1, ',');
 
-            while (($row = fgetcsv($handle, 100, ',')) !== false) {
+            while (($row = fgetcsv($handle, 500, ',')) !== false) {
                 if (isset($row[self::UKULELE_FORMULA_KEY]) and !empty($row[self::UKULELE_FORMULA_KEY])) {
                     $formulas[] = FormulaFactory::create(
                         $row[self::NAME_KEY],
