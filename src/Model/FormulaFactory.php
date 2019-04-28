@@ -22,16 +22,18 @@ class FormulaFactory
      * @param string $ukuleleFormula
      * @param string $symbol
      * @param string $slugName
+     * @param string $symbolVariations
      * @return Formula
      */
-    static public function create($name, $regularFormula, $ukuleleFormula, $symbol, $slugName)
+    static public function create($name, $regularFormula, $ukuleleFormula, $symbol, $slugName, $symbolVariations)
     {
         return new Formula(
             $name,
             explode('-', $regularFormula),
             explode('-', $ukuleleFormula),
             $symbol,
-            $slugName
+            $slugName,
+            explode(';', $symbolVariations)
         );
     }
 }
