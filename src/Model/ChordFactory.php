@@ -11,7 +11,7 @@ class ChordFactory
         return new \ChordGenerator\Model\Chord(
             $rootNote,
             "{$rootNote} {$name}",
-            strtolower($rootNote) . "_$slugName",
+            str_replace('#', '_sharp', strtolower($rootNote)) . "_$slugName",
             "{$rootNote}{$symbol}",
             $formula,
             $notes,
