@@ -12,6 +12,7 @@
  * source code.
  */
 
+use ChordGenerator\Model\Tonality;
 use PHPUnit\Framework\TestCase;
 
 class TonalityTest extends TestCase
@@ -47,6 +48,11 @@ class TonalityTest extends TestCase
     public function testReturnCTonalityNotesOnEmptyRootNote()
     {
         $this->assertEquals(ChordGenerator\Model\Tonality::getTonality(), ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']);
+    }
+
+    public function testReturnDbTonalityNotesOnEmptyRootNote()
+    {
+        $this->assertEquals(ChordGenerator\Model\Tonality::getTonality('Db'), ['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C']);
     }
 
 

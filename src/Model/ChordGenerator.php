@@ -18,7 +18,7 @@ class ChordGenerator
 {
     static public function generateAll()
     {
-        foreach (\ChordGenerator\Model\Tonality::CHROMATIC_SCALE as $rootNote) {
+        foreach (\ChordGenerator\Model\Tonality::NOTES as $rootNote) {
             $keys = \ChordGenerator\Model\Key::$keys;
             $tonality = \ChordGenerator\Model\Tonality::getTonality($rootNote);
             $fretboard = \ChordGenerator\Model\UkuleleFretboard::FRETBOARD;

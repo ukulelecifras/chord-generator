@@ -61,7 +61,7 @@ class Tonality
 
     static public function getTonality($rootNote = 'C')
     {
-        $rootNoteIndex = array_search($rootNote, self::CHROMATIC_SCALE);
+        $rootNoteIndex = array_search(self::normalize($rootNote), self::CHROMATIC_SCALE);
         if ($rootNoteIndex === false) {
             throw new \Exception("The root note '$rootNote' doest not exists in the chromatic scale. Expected values: C,C#,D,D#,E,F,G,G#,A,A# or B.", 1545659945);
         }
