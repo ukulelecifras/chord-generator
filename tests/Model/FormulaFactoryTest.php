@@ -18,10 +18,12 @@ class FormulaFactoryTest extends TestCase
 {
     function testCreateFormulaObjectWithCorrectPropertiesValueAndType()
     {
-        $formula = \ChordGenerator\Model\FormulaFactory::create('name', "1-3-5", "1-5", "symbol");
+        $formula = \ChordGenerator\Model\FormulaFactory::create('name', "1-3-5", "1-5", "symbol", 'slug', 'sy1;sy2');
         $this->assertEquals('name', $formula->getName());
         $this->assertEquals(['1','3','5'], $formula->getRegularFormula());
         $this->assertEquals(['1','5'], $formula->getUkeFormula());
         $this->assertEquals('symbol', $formula->getSymbol());
+        $this->assertEquals('slug', $formula->getSlugName());
+        $this->assertEquals(['sy1','sy2'], $formula->getSymbolVariations());
     }
 }

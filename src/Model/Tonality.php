@@ -16,6 +16,26 @@ namespace ChordGenerator\Model;
 
 class Tonality
 {
+    const NOTES = [
+        'C',
+        'C#',
+        'Db',
+        'D',
+        'D#',
+        'Eb',
+        'E',
+        'F',
+        'F#',
+        'Gb',
+        'G',
+        'G#',
+        'Ab',
+        'A',
+        'A#',
+        'Bb',
+        'B'
+    ];
+
     const CHROMATIC_SCALE = [
         0   => 'C', // 1
         1   => 'C#',
@@ -31,6 +51,14 @@ class Tonality
         11  => 'B'  // 7
     ];
 
+    const DICTIONARY = [
+        'Db' => 'C#',
+        'Eb' => 'D#',
+        'Gb' => 'F#',
+        'Ab' => 'G#',
+        'Bb' => 'A#',
+    ];
+
     static public function getTonality($rootNote = 'C')
     {
         $rootNoteIndex = array_search($rootNote, self::CHROMATIC_SCALE);
@@ -41,5 +69,12 @@ class Tonality
             array_slice(self::CHROMATIC_SCALE, $rootNoteIndex, count(self::CHROMATIC_SCALE)),
             array_slice(self::CHROMATIC_SCALE, 0, $rootNoteIndex)
         );
+    }
+
+    static public function normalize($note) {
+        if(array_key_exists($note, self::DICTIONARY)) {
+            return self::DICTIONARY[$note];
+        }
+        return $note;
     }
 }

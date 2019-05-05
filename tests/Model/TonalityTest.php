@@ -55,4 +55,14 @@ class TonalityTest extends TestCase
         $this->expectException(\Exception::class);
         \ChordGenerator\Model\Tonality::getTonality('Z');
     }
+
+    public function testNormalizeFlatRootNote()
+    {
+        $this->assertEquals(\ChordGenerator\Model\Tonality::normalize('Db'), 'C#');
+    }
+
+    public function testNormalizeReturnsSameSharpRootNote()
+    {
+        $this->assertEquals(\ChordGenerator\Model\Tonality::normalize('C#'), 'C#');
+    }
 }
